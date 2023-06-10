@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3ndac1qukcyl"]
+
+[ext_resource type="Shader" path="res://Tophgraphy/topography.gdshader" id="1_m6qsy"]
+[ext_resource type="Script" path="res://Tophgraphy/topography.gd" id="1_nkhmj"]
+[ext_resource type="Script" path="res://Tophgraphy/Terrain.gd" id="2_2ai3m"]
+[ext_resource type="Texture2D" uid="uid://dq3c5ya3iys0o" path="res://icon.png" id="2_fgnn3"]
+[ext_resource type="Texture2D" uid="uid://ji3x38udsvci" path="res://graymapforblender - 副本.png" id="3_rs6xh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_so7fr"]
+render_priority = 0
+shader = ExtResource("1_m6qsy")
+shader_parameter/height_ratio = 3.0
+shader_parameter/heightmap = ExtResource("3_rs6xh")
+shader_parameter/_a = ExtResource("2_fgnn3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u3jwu"]
+material = SubResource("ShaderMaterial_so7fr")
+size = Vector2(16, 9)
+subdivide_width = 152
+subdivide_depth = 86
+
+[node name="Topography" type="Node3D"]
+script = ExtResource("1_nkhmj")
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_u3jwu")
+script = ExtResource("2_2ai3m")
+
+[node name="StaticBody3d" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="StaticBody3d"]
+
+[node name="Camera3d" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 11.9246, 13.55)

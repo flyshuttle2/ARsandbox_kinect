@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://dmao3pxmyo31m"]
+
+[ext_resource type="Shader" path="res://ss.gdshader" id="1_0cl40"]
+[ext_resource type="Script" path="res://Terrain.gd" id="2_7l2sk"]
+[ext_resource type="Texture2D" uid="uid://d75lvk2lbxt5" path="res://4volcono1.png" id="2_lqm3q"]
+[ext_resource type="Texture2D" uid="uid://ji3x38udsvci" path="res://graymapforblender - 副本.png" id="3_nhwts"]
+[ext_resource type="Texture2D" uid="uid://c7rmpyrvvg280" path="res://1opensource1.png" id="4_6xgum"]
+[ext_resource type="PackedScene" uid="uid://buut758lfwuk4" path="res://Animals/one_fish/single_fish.tscn" id="7_exkln"]
+[ext_resource type="Script" path="res://Scripts/fish/Fishes_Boids.gd" id="7_lfao1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alafo"]
+render_priority = 0
+shader = ExtResource("1_0cl40")
+shader_parameter/contourLineFactor = null
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_nhwts")
+shader_parameter/ColorMapSampler = ExtResource("2_lqm3q")
+
+[sub_resource type="PlaneMesh" id="6"]
+material = SubResource("ShaderMaterial_alafo")
+size = Vector2(8, 4.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_334ik"]
+render_priority = 0
+shader = ExtResource("1_0cl40")
+shader_parameter/contourLineFactor = null
+shader_parameter/albedo = null
+shader_parameter/texture_albedo = ExtResource("3_nhwts")
+shader_parameter/ColorMapSampler = ExtResource("4_6xgum")
+
+[sub_resource type="SphereMesh" id="SphereMesh_py41h"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tsna"]
+albedo_color = Color(1, 0.294118, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y6uic"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te6fp"]
+albedo_color = Color(1, 0.219608, 0.392157, 1)
+metallic = 0.32
+roughness = 0.3
+
+[node name="Main" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2.25)
+mesh = SubResource("6")
+surface_material_override/0 = SubResource("ShaderMaterial_334ik")
+script = ExtResource("2_7l2sk")
+
+[node name="Avatar" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Avatar"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 2.9, 2.25)
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.46808, 0.426446, 1.61984)
+mesh = SubResource("SphereMesh_py41h")
+surface_material_override/0 = SubResource("StandardMaterial3D_8tsna")
+
+[node name="MeshInstance3d2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 7.14155, 0.456541, 0.740941)
+mesh = SubResource("BoxMesh_y6uic")
+surface_material_override/0 = SubResource("StandardMaterial3D_te6fp")
+
+[node name="Animals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2.25)
+
+[node name="one_fish_1" parent="." instance=ExtResource("7_exkln")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23148, 0, 2.27713)
+script = null
+
+[node name="Fishes_Boids" type="Node3D" parent="."]
+script = ExtResource("7_lfao1")
+playSpeed = 0

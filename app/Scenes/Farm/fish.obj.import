@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ec41k6p2ufsd"
+path="res://.godot/imported/fish.obj-1acd75191a008d3309b57f38c6201014.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fish.obj-1acd75191a008d3309b57f38c6201014.mesh"]
+
+source_file="res://Scenes/Farm/fish.obj"
+dest_files=["res://.godot/imported/fish.obj-1acd75191a008d3309b57f38c6201014.mesh", "res://.godot/imported/fish.obj-1acd75191a008d3309b57f38c6201014.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

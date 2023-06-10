@@ -1,0 +1,75 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccslgsawpctch"]
+
+[ext_resource type="Script" path="res://test/Node.gd" id="1_no6nt"]
+[ext_resource type="Shader" path="res://ss.gdshader" id="2_5h5es"]
+[ext_resource type="Texture2D" uid="uid://d75lvk2lbxt5" path="res://4volcono1.png" id="3_m10eb"]
+[ext_resource type="Texture2D" uid="uid://c7rmpyrvvg280" path="res://1opensource1.png" id="5_pop5t"]
+[ext_resource type="Script" path="res://test/Terrain_test.gd" id="6_2im3y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alafo"]
+render_priority = 0
+shader = ExtResource("2_5h5es")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/ColorMapSampler = ExtResource("3_m10eb")
+
+[sub_resource type="PlaneMesh" id="6"]
+material = SubResource("ShaderMaterial_alafo")
+size = Vector2(8, 4.5)
+
+[sub_resource type="ImageTexture" id="ImageTexture_cvqql"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_334ik"]
+render_priority = 0
+shader = ExtResource("2_5h5es")
+shader_parameter/albedo = null
+shader_parameter/texture_albedo = SubResource("ImageTexture_cvqql")
+shader_parameter/ColorMapSampler = ExtResource("5_pop5t")
+
+[sub_resource type="SphereMesh" id="SphereMesh_py41h"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tsna"]
+albedo_color = Color(1, 0.294118, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_trcxl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y6uic"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te6fp"]
+albedo_color = Color(1, 0.219608, 0.392157, 1)
+metallic = 0.32
+roughness = 0.3
+
+[node name="Node" type="Node"]
+script = ExtResource("1_no6nt")
+
+[node name="Main" type="Node3D" parent="."]
+
+[node name="Terrain" type="MeshInstance3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2.25)
+mesh = SubResource("6")
+surface_material_override/0 = SubResource("ShaderMaterial_334ik")
+script = ExtResource("6_2im3y")
+
+[node name="Avatar" type="Node3D" parent="Main"]
+
+[node name="Camera3D" type="Camera3D" parent="Main/Avatar"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 2.9, 2.25)
+fov = 116.5
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.3)
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="Main/CharacterBody3D"]
+mesh = SubResource("SphereMesh_py41h")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_8tsna")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main/CharacterBody3D"]
+shape = SubResource("SphereShape3D_trcxl")
+
+[node name="MeshInstance3d2" type="MeshInstance3D" parent="Main"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.75588, 0.456541, 2.26918)
+mesh = SubResource("BoxMesh_y6uic")
+surface_material_override/0 = SubResource("StandardMaterial3D_te6fp")
